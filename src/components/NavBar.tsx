@@ -5,28 +5,29 @@ interface NavBarProps {
     pokemonListProp: ({ name: string; imgSrc: string; } | { name: string; imgSrc?: undefined; })[];
   }
 
-  function NavBar ({pokemonIndexProp, setPokemonIndexProp,pokemonListProp}: NavBarProps) {
-
-    function handleClickPokemonIndexPrécédent () {
-      if (pokemonIndexProp > 0) {
-      setPokemonIndexProp (pokemonIndexProp - 1)};
-    }
   
-    function handleClickPokemonIndexSuivant () {
-      if (pokemonIndexProp < (pokemonListProp.length)-1) {
-        setPokemonIndexProp (pokemonIndexProp +1)};
-    }
+    function NavBar ({pokemonIndexProp, setPokemonIndexProp,pokemonListProp}: NavBarProps) {
 
+function handlePokemonClick (i: number) {
+  setPokemonIndexProp (i)
+}
 
 return (
     <>
-    <button type="button" onClick={handleClickPokemonIndexPrécédent}>Précédent</button>
-    <button type="button" onClick={handleClickPokemonIndexSuivant}>Suivant</button>
+
+    {pokemonListProp.map((pokemon,index) => 
+    
+    (
+        <button key={pokemon.name} onClick={() => handlePokemonClick(index)}>
+          {pokemon.name}
+        </button>
+    )    )}
+
     </>
-
 )
-  }
 
-  export default NavBar
+
+}
 
   
+  export default NavBar
